@@ -1,6 +1,6 @@
-.PHONY: test golint
+.PHONY: test golint tagversion
 
-all: test golint
+all: test golint tagversion
 
 test:
 	make golint
@@ -10,3 +10,6 @@ test:
 golint:
 	find . -name '*.go' -not -path './vendor/*' -exec dirname {} \; | xargs go vet
 	find . -name '*.go' -not -path './vendor/*' -exec dirname {} \; | xargs go fmt -x
+
+tagversion:
+	./bin/tagversion.bash
