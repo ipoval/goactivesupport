@@ -92,7 +92,7 @@ func NumberToStrFast(n interface{}) string {
   switch v.Kind() {
   case reflect.Float32, reflect.Float64:
     return strconv.FormatFloat(v.Float(), 'f', -1, 64)
-  case reflect.Int, reflect.Uint:
+  case reflect.Int, reflect.Uint, reflect.Int64, reflect.Uint64:
     return strconv.FormatInt(v.Int(), 10)
   default:
     return "nil"

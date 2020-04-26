@@ -17,6 +17,7 @@ func TestNumberToStrFast(t *testing.T) {
     {0.1, "0.1"},
     {101.101, "101.101"},
     {-202.202, "-202.202"},
+    {int64(2229212), "2229212"},
   }
 
   for _, c := range table {
