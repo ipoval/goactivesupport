@@ -12,7 +12,7 @@ import (
   "unicode"
 )
 
-// SCOPE: OS
+// Scope: OS
 // Return default value if given environment variable is blank
 func GetenvDv(k string, dv interface{}) (interface{}, error) {
   if v := os.Getenv(k); v != "" {
@@ -21,7 +21,7 @@ func GetenvDv(k string, dv interface{}) (interface{}, error) {
   return dv, nil
 }
 
-// SCOPE: LOGGING
+// Scope: Logging
 func GetFileLogger(path string) *log.Logger {
   file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0664)
   defer file.Close()
@@ -35,7 +35,7 @@ func GetFileLogger(path string) *log.Logger {
   return result
 }
 
-// SCOPE: FILES
+// Scope: Files
 const (
   exitStatusCodeSuccess    = iota // 0
   exitStatusCodeError             // 1
@@ -65,12 +65,44 @@ func FileLineCount(filepath string) (int, error) {
   return count, nil
 }
 
-// SCOPE: STRINGS
+// Scope: Strings
 func IsLetter(c rune) bool {
   return unicode.IsLetter(c)
 }
 
-// SCOPE: NUMBERS
+func StringValidLuhnCreditCardNumber(str string) bool {
+  str = strings.ReplaceAll(str, " ", "")
+  l := len(str)
+  if l < 2 {
+    return false
+  }
+
+  sum := 0
+  chars := strings.Split(str, "")
+
+  for i, i2 := l-1, l-2; i > 0 || i2 > 0; i, i2 = i-2, i2-2 {
+    sym, sym2 := chars[i], "0"
+    if i2 >= 0 {
+      sym2 = chars[i2]
+    }
+
+    digit, err := strconv.Atoi(sym)
+    digit2, err2 := strconv.Atoi(sym2)
+    if err != nil || err2 != nil {
+      return false
+    }
+
+    if digit2 *= 2; digit2 > 9 {
+      digit2 -= 9
+    }
+
+    sum += (digit + digit2)
+  }
+
+  return sum%10 == 0
+}
+
+// Scope: Numbers
 const (
   _  = iota // ignore
   KB = 1 << (10 * iota)
@@ -92,7 +124,7 @@ func NumberToStrFast(n interface{}) string {
   switch v.Kind() {
   case reflect.Float32, reflect.Float64:
     return strconv.FormatFloat(v.Float(), 'f', -1, 64)
-  case reflect.Int, reflect.Uint:
+  case reflect.Int, reflect.Uint, reflect.Int64, reflect.Uint64:
     return strconv.FormatInt(v.Int(), 10)
   default:
     return "nil"

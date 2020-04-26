@@ -3,7 +3,6 @@
 all: test golint tagversion
 
 test:
-	make golint
 	go test -cover -race -v ./...
 
 # check syntax is valid for all files in project
