@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-VERSION_DEFAULT="0.1.1"
+source ./bin/helpers.bash
 
-echo -n "Version [x.x.x, default ${VERSION_DEFAULT}]: "
+if [ -f version.go ]; then
+  VERSION_DEFAULT=$(getAppVersion)
+else
+  VERSION_DEFAULT="0.1.1"
+fi
+
+echo -n "Version [x.x.x, default:${VERSION_DEFAULT}]: "
 read version
 version=${version:-"${VERSION_DEFAULT}"}
 
