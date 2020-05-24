@@ -21,6 +21,13 @@ func GetenvDv(k string, dv interface{}) (interface{}, error) {
   return dv, nil
 }
 
+// Scope: REST
+var MimeType = struct {
+  Json, Html, Text string
+}{
+  "application/json", "text/html", "text/plain",
+}
+
 // Scope: Logging
 func GetFileLogger(path string) *log.Logger {
   file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0664)
