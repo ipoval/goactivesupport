@@ -7,6 +7,7 @@ import (
   "os"
   "os/exec"
   "reflect"
+  "runtime"
   "strconv"
   "strings"
   "unicode"
@@ -19,13 +20,6 @@ func GetenvDv(k string, dv interface{}) (interface{}, error) {
     return v, nil
   }
   return dv, nil
-}
-
-// Scope: REST
-var MimeType = struct {
-  Json, Html, Text string
-}{
-  "application/json", "text/html", "text/plain",
 }
 
 // Scope: Logging
@@ -70,6 +64,11 @@ func FileLineCount(filepath string) (int, error) {
     return 0, fmt.Errorf("could not convert wc -l output to integer: %s", err)
   }
   return count, nil
+}
+
+// Scope: Methods
+func MethodName(m interface{}) string {
+  return runtime.FuncForPC(reflect.ValueOf(m).Pointer()).Name()
 }
 
 // Scope: Strings

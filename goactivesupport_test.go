@@ -3,6 +3,8 @@ package goactivesupport
 import (
   "fmt"
   "testing"
+
+  "github.com/stretchr/testify/assert"
 )
 
 func TestNumberToStrFast(t *testing.T) {
@@ -42,6 +44,11 @@ func BenchmarkSprintf(b *testing.B) {
   }
 }
 
+func TestMethodName(t *testing.T) {
+  f := func() {}
+  assert.Equal(t, "github.com/ipoval/goactivesupport.TestMethodName.func1", MethodName(f))
+}
+
 func TestStringValidLuhnCreditCardNumber(t *testing.T) {
   testCases := []struct {
     description string
@@ -75,6 +82,7 @@ func TestStringValidLuhnCreditCardNumber(t *testing.T) {
 }
 
 func BenchmarkStringValidLuhnCreditCardNumber(b *testing.B) {
+  b.ResetTimer()
   for i := 0; i < b.N; i++ {
     StringValidLuhnCreditCardNumber("2323 2005 7766 3554")
   }
