@@ -22,11 +22,11 @@ func HttpRedirectTo(resp *http.ResponseWriter, location string) {
 func HttpChainMiddlewareRequestDump(next http.HandlerFunc) http.HandlerFunc {
   return func(resp http.ResponseWriter, req *http.Request) {
     log.WithField("middleware", "request_dump").Info(req.Method)
-    log.WithField("middleware", "request_dump").Info(req.URL.Path)
-    log.WithField("middleware", "request_dump").Info(req.URL.Path[1:])
     log.WithField("middleware", "request_dump").Info(req.RemoteAddr)
+    log.WithField("middleware", "request_dump").Info(req.URL.Path)
+    log.WithField("middleware", "request_dump").Info(req.URL.RawQuery)
     log.WithField("middleware", "request_dump").Info(req.Header.Get("Accept-Encoding"))
-    log.WithField("middleware", "request_dump").Info(req.Header["Content-Type"])
+    log.WithField("middleware", "request_dump").Info(req.Header["User-Agent"])
     log.WithField("middleware", "request_dump").Info(req.ContentLength)
     log.Info(req.Header)
     reqDump, _ := httputil.DumpRequest(req, true)

@@ -5,7 +5,7 @@ $(info $(SHELL))
 
 .PHONY: test
 test:
-	go test -cover -race -v ./...
+	go test -v -cover -race -timeout 15s ./...
 
 # check syntax is valid for all files in project
 .PHONY: golint

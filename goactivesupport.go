@@ -10,7 +10,8 @@ import (
   "runtime"
   "strconv"
   "strings"
-  "unicode"
+
+  "golang.org/x/crypto/bcrypt"
 )
 
 // Scope: OS
@@ -72,8 +73,12 @@ func MethodName(m interface{}) string {
 }
 
 // Scope: Strings
-func IsLetter(c rune) bool {
-  return unicode.IsLetter(c)
+func BcyptHashStr(str string) (string, error) {
+  bytesHash, err := bcrypt.GenerateFromPassword([]byte(str), bcrypt.MinCost)
+  if err != nil {
+    return "", err
+  }
+  return string(bytesHash), nil
 }
 
 func StringValidLuhnCreditCardNumber(str string) bool {

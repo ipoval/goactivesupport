@@ -2,10 +2,15 @@ package goactivesupport
 
 import (
   "fmt"
+  "os"
   "testing"
 
   "github.com/stretchr/testify/assert"
 )
+
+func TestMain(m *testing.M) {
+  os.Exit(m.Run())
+}
 
 func TestNumberToStrFast(t *testing.T) {
   testCases := []struct {
@@ -86,4 +91,12 @@ func BenchmarkStringValidLuhnCreditCardNumber(b *testing.B) {
   for i := 0; i < b.N; i++ {
     StringValidLuhnCreditCardNumber("2323 2005 7766 3554")
   }
+}
+
+func TestBcryptHashStr(t *testing.T) {
+  word := "test"
+  hash, err := BcyptHashStr(word)
+  assert.NoError(t, err)
+  assert.NotEqual(t, word, hash)
+  assert.Len(t, hash, 60)
 }
