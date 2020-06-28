@@ -1,5 +1,13 @@
 ### goactivesupport
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/1ea328c26d422c1bc415/maintainability)](https://codeclimate.com/github/ipoval/goactivesupport/maintainability)
+
+
+#### REST package
+```go
+
+```
+
 Tests
 ```shell script
 make test

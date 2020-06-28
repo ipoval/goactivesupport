@@ -1,4 +1,4 @@
-package browser
+package rest
 
 import (
   "strings"
