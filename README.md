@@ -5,7 +5,12 @@
 
 #### REST package
 ```go
+import (
+  gasrest "github.com/ipoval/goactivesupport/rest"
+)
 
+gasrest.UserAgent.Chrome()
+gasrest.UserAgent.Random()
 ```
 
 Tests
