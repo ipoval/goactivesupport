@@ -16,6 +16,13 @@ func TestTypeBoolean_Cast(t1 *testing.T) {
     want   bool
   }{
     {
+      "value empty string",
+      fields{
+        ValueAsStr: "",
+      },
+      false,
+    },
+    {
       "value false",
       fields{
         ValueAsStr: "false",
