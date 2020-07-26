@@ -9,12 +9,14 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// MimeType is a collection of mime types
 var MimeType = struct {
 	Json, Html, Text string
 }{
 	"application/json", "text/html", "text/plain",
 }
 
+// RenderJsonErr...
 func RenderJsonErr(resp http.ResponseWriter, httpStatus int, err error) {
 	resp.Header().Set("Content-Type", MimeType.Json)
 	resp.WriteHeader(httpStatus)
@@ -30,6 +32,7 @@ func RenderJsonErr(resp http.ResponseWriter, httpStatus int, err error) {
 	json.NewEncoder(resp).Encode(&jsonErr)
 }
 
+// HttpRedirectTo...
 func HttpRedirectTo(resp *http.ResponseWriter, location string) {
 	(*resp).Header().Set("Location", location)
 	(*resp).WriteHeader(302)

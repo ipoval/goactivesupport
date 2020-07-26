@@ -2,6 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ea328c26d422c1bc415/maintainability)](https://codeclimate.com/github/ipoval/goactivesupport/maintainability)
 
+[goreportcard.com](https://goreportcard.com/report/github.com/ipoval/goactivesupport)
 
 #### REST package
 ```go
